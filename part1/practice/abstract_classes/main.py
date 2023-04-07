@@ -1,45 +1,71 @@
-# Создайте абстрактный класс автомобиля Transport c абстрактными методами
-# - start_engine
-# - stop_engine
-# - move
-# - stop
 
-# Унаследуйте от него три класса Boat, Car, Electroscooter
-# для каждого из требуемых методов через print укажите какое-либо действие.
-# К примеру start_engine -> print('Двигатель катера запущен')
+from abc import ABC, abstractmethod
 
-# Создайте класс Person у которого будет один единственный метод use_transport.
-# В данный метод в качестве параметра должен передаваться объект реализующий интерфейс Transport
-# Метод для этого объекта должен запускать двигатель, двигаться куда-то, тормозить и глушить двигатель.
-# Для текстовой анимации Вы можете использовать любые фразы, или воспользоваться нашей подборкой:
-# Boat:
-#    - Катер громко затарахтел
-#    - Двигатель катера чихнул напоследок и заглох
-#    - Катер быстро набирает скорость
-#    - Катер остановился
-# Car:
-#    - Машина заурчала двигателем
-#    - Машина стоит с заглушенным двигателем
-#    - Машина едет к цели назначения
-#    - Машина остановилась
-# Electroscooter:
-#    - Мигнул светодиодом
-#    - Мигнул светодиодом дважды
-#    - Прохожие в ужасе разбегаются от очередного камикадзе
-#    - Торможение об стену прошло успешно
+class Transport(ABC):
+    @abstractmethod
+    def __init__(self):
+        pass
 
+    @abstractmethod
+    def start_engine(self):
+        pass
 
-# Корректным решением будет когда экземпляр класса Person смог использовать все три различных транспорта
+    @abstractmethod
+    def stop_engine(self):
+        pass
 
-# в решении класс Transport должен быть унаследован от ABC
-# все методы Transport должны быть помечены декоратором @abstractmethod
-# Классы Boat, Car, Electroscooter должны быть унаследованы от Transport
+    @abstractmethod
+    def move(self):
+        pass
 
-# экземпляр класса Person должен поочередно взаимодействовать с объектами Car, Boat, Electroscooter
+    @abstractmethod
+    def stop(self):
+        pass
 
-# код должен выполняться не выбрасывая исключений
+class Boat(Transport):
+    def start_engine(self):
+        print('Катер громко затарахтел')
 
-# TODO напишите Ваш код здесь
+    def stop_engine(self):
+        print('Двигатель катера приостоновлен')
+
+    def move(self):
+        print('Прохожие в ужасе разбегаются от очередного камикадзе')
+
+    def stop(self):
+        print('Двигатель катера чихнул напоследок и заглох')
+class Car(Transport):
+    def start_engine(self):
+        print('Машина заурчала двигателем')
+
+    def stop_engine(self):
+        print('Машина остановилась')
+
+    def move(self):
+        print('Машина едет к цели назначения')
+
+    def stop(self):
+        print('Машина стоит с заглушенным двигателем')
+
+class Electroscooter(Transport):
+    def start_engine(self):
+        print('Мигнул светодиодом')
+
+    def stop_engine(self):
+        print('Мигнул светодиодом дважды')
+    def move(self):
+        print('Прохожие в ужасе разбегаются от очередного камикадзе')
+
+    def stop(self):
+        print('Торможение об стену прошло успешно')
+
+class Person:
+
+    def use_transport(self, tr: Transport):
+        tr.start_engine()
+        tr.move()
+        tr.stop_engine()
+        tr.stop()
 
 
 # Отрезок кода для самопроверки.
